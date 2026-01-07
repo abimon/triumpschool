@@ -38,9 +38,12 @@ class StudentController extends Controller
     {
         try {
             $validate = Validator::make(request()->all(), [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'intake_id' => 'required',
+                'name'=>'required|string',
+                'email'=>'required|email',
+                'phone'=>'required|string',
+                'intake_id'=>'required|integer',
+                'course'=>'required|string',
+                'mode_of_contact'=>'required|string',
             ]);
 
             if ($validate->fails()) {
@@ -117,7 +120,10 @@ class StudentController extends Controller
             if (request()->is('api/*')) {
                 return response()->json(['message' => 'Student updated successfully'], 200);
             }
-            return redirect()->back()->with('success', 'Student updated successfully');
+            return response()->json([
+                'status' => true,
+                'message' => 'Student added Successfully',
+            ], 201);
             
         } catch (\Throwable $th) {
             if(request()->is('api/*')) {

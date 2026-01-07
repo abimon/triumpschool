@@ -299,6 +299,14 @@
             background: #f8d7da;
             color: #721c24;
         }
+        .status-401 {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status-404 {
+            background: #f8d7da;
+            color: #721c24;
+        }
     </style>
 </head>
 
@@ -407,7 +415,7 @@
                     </div>
                 </div>
                 <div class="endpoint-body">
-                    <div class="description">Create a new user account. All fields are required. Password must be at least 8 characters.</div>
+                    <div class="description">Create a new user account. All fields are required. Password must be at least 8 characters. The user's `role` is automatically set to "Student" on creation.</div>
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
@@ -490,7 +498,7 @@
                     <div class="section">
                         <div class="section-title">Sample Response - Validation Error (401)</div>
                         <div class="error-block">
-                            <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
+                            <div class="label"><span class="response-status status-401">401</span>Validation Failed</div>
                             <div class="code-block">{
                                 "status": false,
                                 "message": "validation error",
@@ -580,7 +588,7 @@
                     <div class="section">
                         <div class="section-title">Sample Response - Unauthorized (401)</div>
                         <div class="error-block">
-                            <div class="label"><span class="response-status status-500">401</span>Unauthorized</div>
+                            <div class="label"><span class="response-status status-401">401</span>Unauthorized</div>
                             <div class="code-block">{
                                 "status": false,
                                 "message": "Email & Password does not match with our record."
