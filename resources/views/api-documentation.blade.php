@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triumph School API Documentation</title>
+    <title>Triumph School API Documentation - Complete Endpoint Reference</title>
     <style>
         * {
             margin: 0;
@@ -317,16 +317,81 @@
             <div class="toc">
                 <h3>📑 Table of Contents</h3>
                 <ul>
-                    <li><a href="#auth">Authentication</a></li>
+                    <li><a href="#auth">Authentication & User Management</a></li>
                     <li><a href="#students">Students Endpoints</a></li>
                     <li><a href="#intakes">Intakes Endpoints</a></li>
                     <li><a href="#courses">Courses Endpoints</a></li>
                     <li><a href="#fee-payments">Fee Payments Endpoints</a></li>
+                    <li><a href="#errors">Common Error Responses</a></li>
                 </ul>
             </div>
 
-            <!-- AUTHENTICATION -->
-            <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;" id="auth">🔐 Authentication</h2>
+            <!-- AUTHENTICATION & USER MANAGEMENT -->
+            <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;" id="auth">🔐 Authentication & User Management</h2>
+
+            <!-- GET Current User -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Get Current User</h3>
+                    <div>
+                        <span class="method-badge method-get">GET</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Retrieve the authenticated user's profile information.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">GET /user</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Headers</div>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Header</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Authorization</td>
+                                    <td>string</td>
+                                    <td>Bearer token obtained from login</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/user" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Accept: application/json"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (200 OK)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-200">200</span>Success</div>
+                            <div class="code-block">{
+  "id": 10,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+1234567890",
+  "role": "Student",
+  "image": "images/john.jpg",
+  "email_verified_at": null,
+  "created_at": "2025-12-10T12:00:00.000000Z",
+  "updated_at": "2025-12-10T12:00:00.000000Z"
+}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="endpoint-card">
                 <div class="endpoint-header">
@@ -336,7 +401,7 @@
                     </div>
                 </div>
                 <div class="endpoint-body">
-                    <div class="description">Create a new user account and receive credentials (typically returns the created user). For API usage you may want to follow signup with login to obtain a token.</div>
+                    <div class="description">Create a new user account. All fields are required. Password must be at least 8 characters.</div>
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
@@ -359,25 +424,31 @@
                                     <td>name</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>User's full name</td>
+                                    <td>User's full name (must be unique)</td>
                                 </tr>
                                 <tr>
                                     <td>email</td>
                                     <td>email</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Unique email address</td>
+                                    <td>Valid email address (must be unique)</td>
                                 </tr>
                                 <tr>
                                     <td>password</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Password for the account</td>
+                                    <td>Password (minimum 8 characters)</td>
                                 </tr>
                                 <tr>
-                                    <td>password_confirmation</td>
+                                    <td>phone</td>
                                     <td>string</td>
-                                    <td><span class="optional">Optional</span></td>
-                                    <td>Confirm password (if the API validates confirmation)</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>Phone number (9-13 characters)</td>
+                                </tr>
+                                <tr>
+                                    <td>role</td>
+                                    <td>string</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>User role: Student, Staff, or Admin</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -388,10 +459,11 @@
                         <div class="code-block">curl -X POST "{{ url('/api') }}/signup" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "New User",
-    "email": "new.user@example.com",
-    "password": "secret123",
-    "password_confirmation": "secret123"
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "password": "securepass123",
+    "phone": "+1234567890",
+    "role": "Student"
   }'</div>
                     </div>
 
@@ -402,24 +474,30 @@
                             <div class="code-block">{
   "user": {
     "id": 10,
-    "name": "New User",
-    "email": "new.user@example.com",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "phone": "+1234567890",
+    "role": "Student",
+    "image": null,
     "created_at": "2025-12-10T12:00:00.000000Z"
-  }
+  },
+  "status": true,
+  "message": "User Created Successfully",
+  "token": "12|eyJ0eXAiOiJKV1QiLCJhbGci..."
 }</div>
                         </div>
                     </div>
 
                     <div class="section">
-                        <div class="section-title">Sample Response - Validation Error (422)</div>
+                        <div class="section-title">Sample Response - Validation Error (401)</div>
                         <div class="error-block">
                             <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
                             <div class="code-block">{
-  "message": "The email has already been taken.",
+  "status": false,
+  "message": "validation error",
   "errors": {
-    "email": [
-      "The email has already been taken."
-    ]
+    "email": ["The email has already been taken."],
+    "phone": ["The phone must be between 9 and 13 characters."]
   }
 }</div>
                         </div>
@@ -435,7 +513,7 @@
                     </div>
                 </div>
                 <div class="endpoint-body">
-                    <div class="description">Authenticate a user and return an access token (Bearer) for use with protected endpoints.</div>
+                    <div class="description">Authenticate with email and password to receive a Bearer token for API access.</div>
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
@@ -458,7 +536,7 @@
                                     <td>email</td>
                                     <td>email</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>User email</td>
+                                    <td>Registered user email</td>
                                 </tr>
                                 <tr>
                                     <td>password</td>
@@ -475,8 +553,8 @@
                         <div class="code-block">curl -X POST "{{ url('/api') }}/login" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "new.user@example.com",
-    "password": "secret123"
+    "email": "jane.smith@example.com",
+    "password": "securepass123"
   }'</div>
                     </div>
 
@@ -485,13 +563,17 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Authenticated</div>
                             <div class="code-block">{
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGci...",
-  "token_type": "Bearer",
+  "status": true,
+  "message": "User Logged In Successfully",
   "user": {
     "id": 10,
-    "name": "New User",
-    "email": "new.user@example.com"
-  }
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "phone": "+1234567890",
+    "role": "Student",
+    "image": null
+  },
+  "token": "12|eyJ0eXAiOiJKV1QiLCJhbGci..."
 }</div>
                         </div>
                     </div>
@@ -501,7 +583,8 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-500">401</span>Unauthorized</div>
                             <div class="code-block">{
-  "message": "Invalid credentials"
+  "status": false,
+  "message": "Email & Password does not match with our record."
 }</div>
                         </div>
                     </div>
@@ -573,7 +656,7 @@
                     </div>
                 </div>
                 <div class="endpoint-body">
-                    <div class="description">Create a new student with their user account and assign them to an intake.</div>
+                    <div class="description">Create a new student and automatically create an associated user account if it doesn't exist. Student must be assigned to an intake.</div>
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
@@ -608,7 +691,7 @@
                                     <td>intake_id</td>
                                     <td>integer</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>ID of the intake to assign the student to</td>
+                                    <td>ID of the intake to assign student to</td>
                                 </tr>
                                 <tr>
                                     <td>phone</td>
@@ -620,19 +703,19 @@
                                     <td>course</td>
                                     <td>string</td>
                                     <td><span class="optional">Optional</span></td>
-                                    <td>Course name or ID</td>
+                                    <td>Course name or ID student is enrolled in</td>
                                 </tr>
                                 <tr>
                                     <td>mode_of_contact</td>
                                     <td>string</td>
                                     <td><span class="optional">Optional</span></td>
-                                    <td>Preferred contact method (e.g., email, phone, sms)</td>
+                                    <td>Preferred contact method (email, phone, sms)</td>
                                 </tr>
                                 <tr>
                                     <td>image</td>
                                     <td>file</td>
                                     <td><span class="optional">Optional</span></td>
-                                    <td>Student's profile image (image file)</td>
+                                    <td>Student's profile image (multipart/form-data)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -644,8 +727,8 @@
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Jane Smith",
-    "email": "jane.smith@example.com",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
     "intake_id": 2,
     "phone": "+1234567890",
     "course": "Web Development",
@@ -668,12 +751,7 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
                             <div class="code-block">{
-  "message": "The email has already been taken.",
-  "errors": {
-    "email": [
-      "The email has already been taken."
-    ]
-  }
+  "message": "The email has already been taken."
 }</div>
                         </div>
                     </div>
@@ -955,7 +1033,7 @@
                     </div>
                 </div>
                 <div class="endpoint-body">
-                    <div class="description">Create a new intake (enrollment period).</div>
+                    <div class="description">Create a new intake (enrollment period). Name, start_month, end_month, and year are required.</div>
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
@@ -978,25 +1056,25 @@
                                     <td>name</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Intake name (e.g., 2025-Q1)</td>
+                                    <td>Intake name (e.g., 2025-Q1, Spring 2025)</td>
                                 </tr>
                                 <tr>
                                     <td>start_month</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Starting month of the intake</td>
+                                    <td>Starting month (e.g., January, February)</td>
                                 </tr>
                                 <tr>
                                     <td>end_month</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Ending month of the intake</td>
+                                    <td>Ending month (e.g., March, December)</td>
                                 </tr>
                                 <tr>
                                     <td>year</td>
                                     <td>integer</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Year of the intake</td>
+                                    <td>Year of the intake (e.g., 2025)</td>
                                 </tr>
                                 <tr>
                                     <td>student_capacity</td>
@@ -1008,7 +1086,7 @@
                                     <td>status</td>
                                     <td>string</td>
                                     <td><span class="optional">Optional</span></td>
-                                    <td>Intake status (e.g., active, inactive, completed)</td>
+                                    <td>Intake status (active, inactive, completed)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1308,7 +1386,7 @@
                     </div>
                 </div>
                 <div class="endpoint-body">
-                    <div class="description">Create a new course offering.</div>
+                    <div class="description">Create a new course offering. Title, description, and price are required. A slug is automatically generated from the title.</div>
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
@@ -1337,25 +1415,25 @@
                                     <td>description</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Course description</td>
+                                    <td>Course description and details</td>
                                 </tr>
                                 <tr>
                                     <td>price</td>
                                     <td>string</td>
                                     <td><span class="required">Required</span></td>
-                                    <td>Course price</td>
+                                    <td>Course price (numeric value as string)</td>
                                 </tr>
                                 <tr>
                                     <td>cover</td>
                                     <td>file</td>
                                     <td><span class="optional">Optional</span></td>
-                                    <td>Course cover image (image file)</td>
+                                    <td>Course cover image (multipart/form-data, image file)</td>
                                 </tr>
                                 <tr>
                                     <td>status</td>
                                     <td>string</td>
                                     <td><span class="optional">Optional</span></td>
-                                    <td>Course status (e.g., active, inactive)</td>
+                                    <td>Course status (active, inactive)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1660,7 +1738,7 @@
             </div>
 
             <!-- Common Error Responses -->
-            <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;">⚠️ Common Error Responses</h2>
+            <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;" id="errors">⚠️ Common Error Responses</h2>
 
             <div class="intro-section">
                 <h3>Unauthorized (401)</h3>
