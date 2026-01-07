@@ -450,12 +450,6 @@
                                     <td><span class="required">Required</span></td>
                                     <td>Phone number (9-13 characters)</td>
                                 </tr>
-                                <tr>
-                                    <td>role</td>
-                                    <td>string</td>
-                                    <td><span class="required">Required</span></td>
-                                    <td>User role: Student, Staff, or Admin</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -468,8 +462,7 @@
                             "name": "Jane Smith",
                             "email": "jane.smith@example.com",
                             "password": "securepass123",
-                            "phone": "+1234567890",
-                            "role": "Student"
+                            "phone": "+1234567890"
                             }'</div>
                     </div>
 
