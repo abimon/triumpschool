@@ -1751,7 +1751,7 @@
                 <h3>Unauthorized (401)</h3>
                 <p>Returned when authentication token is missing or invalid.</p>
                 <div class="error-block">
-                    <div class="label"><span class="response-status status-500">401</span>Unauthorized</div>
+                    <div class="label"><span class="response-status status-401">401</span>Unauthorized</div>
                     <div class="code-block">{
                         "message": "Unauthenticated."
                         }</div>
@@ -1762,7 +1762,7 @@
                 <h3>Not Found (404)</h3>
                 <p>Returned when a resource with the specified ID does not exist.</p>
                 <div class="error-block">
-                    <div class="label"><span class="response-status status-500">404</span>Not Found</div>
+                    <div class="label"><span class="response-status status-404">404</span>Not Found</div>
                     <div class="code-block">{
                         "message": "No query results found for model [App\\Models\\Student] 999"
                         }</div>
