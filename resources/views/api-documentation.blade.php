@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -133,13 +134,15 @@
             padding-bottom: 5px;
         }
 
-        .parameter-table, .response-table {
+        .parameter-table,
+        .response-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
 
-        .parameter-table th, .response-table th {
+        .parameter-table th,
+        .response-table th {
             background: #667eea;
             color: white;
             padding: 12px;
@@ -147,12 +150,14 @@
             font-weight: bold;
         }
 
-        .parameter-table td, .response-table td {
+        .parameter-table td,
+        .response-table td {
             padding: 10px 12px;
             border-bottom: 1px solid #e9ecef;
         }
 
-        .parameter-table tr:hover, .response-table tr:hover {
+        .parameter-table tr:hover,
+        .response-table tr:hover {
             background: #f8f9fa;
         }
 
@@ -296,6 +301,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -305,7 +311,7 @@
 
         <div class="content">
             <!-- Introduction Section -->
-                <div class="intro-section">
+            <div class="intro-section">
                 <h2>📋 Getting Started</h2>
                 <p><strong>Base URL:</strong> <code>{{ url('/api') }}</code></p>
                 <p><strong>Authentication:</strong> All endpoints require Bearer token authentication via Sanctum. Include the token in the Authorization header:</p>
@@ -369,8 +375,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/user" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -378,16 +384,16 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">{
-  "id": 10,
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "+1234567890",
-  "role": "Student",
-  "image": "images/john.jpg",
-  "email_verified_at": null,
-  "created_at": "2025-12-10T12:00:00.000000Z",
-  "updated_at": "2025-12-10T12:00:00.000000Z"
-}</div>
+                                "id": 10,
+                                "name": "John Doe",
+                                "email": "john@example.com",
+                                "phone": "+1234567890",
+                                "role": "Student",
+                                "image": "images/john.jpg",
+                                "email_verified_at": null,
+                                "created_at": "2025-12-10T12:00:00.000000Z",
+                                "updated_at": "2025-12-10T12:00:00.000000Z"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -457,14 +463,14 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/signup" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Jane Smith",
-    "email": "jane.smith@example.com",
-    "password": "securepass123",
-    "phone": "+1234567890",
-    "role": "Student"
-  }'</div>
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "name": "Jane Smith",
+                            "email": "jane.smith@example.com",
+                            "password": "securepass123",
+                            "phone": "+1234567890",
+                            "role": "Student"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -472,19 +478,19 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-201">201</span>Created</div>
                             <div class="code-block">{
-  "user": {
-    "id": 10,
-    "name": "Jane Smith",
-    "email": "jane.smith@example.com",
-    "phone": "+1234567890",
-    "role": "Student",
-    "image": null,
-    "created_at": "2025-12-10T12:00:00.000000Z"
-  },
-  "status": true,
-  "message": "User Created Successfully",
-  "token": "12|eyJ0eXAiOiJKV1QiLCJhbGci..."
-}</div>
+                                "user": {
+                                "id": 10,
+                                "name": "Jane Smith",
+                                "email": "jane.smith@example.com",
+                                "phone": "+1234567890",
+                                "role": "Student",
+                                "image": null,
+                                "created_at": "2025-12-10T12:00:00.000000Z"
+                                },
+                                "status": true,
+                                "message": "User Created Successfully",
+                                "token": "12|eyJ0eXAiOiJKV1QiLCJhbGci..."
+                                }</div>
                         </div>
                     </div>
 
@@ -493,13 +499,13 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
                             <div class="code-block">{
-  "status": false,
-  "message": "validation error",
-  "errors": {
-    "email": ["The email has already been taken."],
-    "phone": ["The phone must be between 9 and 13 characters."]
-  }
-}</div>
+                                "status": false,
+                                "message": "validation error",
+                                "errors": {
+                                "email": ["The email has already been taken."],
+                                "phone": ["The phone must be between 9 and 13 characters."]
+                                }
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -551,11 +557,11 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/login" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "jane.smith@example.com",
-    "password": "securepass123"
-  }'</div>
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "email": "jane.smith@example.com",
+                            "password": "securepass123"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -563,18 +569,18 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Authenticated</div>
                             <div class="code-block">{
-  "status": true,
-  "message": "User Logged In Successfully",
-  "user": {
-    "id": 10,
-    "name": "Jane Smith",
-    "email": "jane.smith@example.com",
-    "phone": "+1234567890",
-    "role": "Student",
-    "image": null
-  },
-  "token": "12|eyJ0eXAiOiJKV1QiLCJhbGci..."
-}</div>
+                                "status": true,
+                                "message": "User Logged In Successfully",
+                                "user": {
+                                "id": 10,
+                                "name": "Jane Smith",
+                                "email": "jane.smith@example.com",
+                                "phone": "+1234567890",
+                                "role": "Student",
+                                "image": null
+                                },
+                                "token": "12|eyJ0eXAiOiJKV1QiLCJhbGci..."
+                                }</div>
                         </div>
                     </div>
 
@@ -583,9 +589,9 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-500">401</span>Unauthorized</div>
                             <div class="code-block">{
-  "status": false,
-  "message": "Email & Password does not match with our record."
-}</div>
+                                "status": false,
+                                "message": "Email & Password does not match with our record."
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -605,7 +611,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Retrieve a list of all students with their associated user and intake information.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">GET /students</div>
@@ -619,8 +625,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/students" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -628,19 +634,19 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">[
-  {
-    "id": 1,
-    "user_id": 5,
-    "intake_id": 2,
-    "mode_of_contact": "email",
-    "status": "active",
-    "name": "John Doe",
-    "image": "images/john.jpg",
-    "intake_name": "2025-Q1",
-    "created_at": "2025-12-10T10:30:00.000000Z",
-    "updated_at": "2025-12-10T10:30:00.000000Z"
-  }
-]</div>
+                                {
+                                "id": 1,
+                                "user_id": 5,
+                                "intake_id": 2,
+                                "mode_of_contact": "email",
+                                "status": "active",
+                                "name": "John Doe",
+                                "image": "images/john.jpg",
+                                "intake_name": "2025-Q1",
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                ]</div>
                         </div>
                     </div>
                 </div>
@@ -657,7 +663,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Create a new student and automatically create an associated user account if it doesn't exist. Student must be assigned to an intake.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">POST /students</div>
@@ -724,16 +730,16 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/students" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "intake_id": 2,
-    "phone": "+1234567890",
-    "course": "Web Development",
-    "mode_of_contact": "email"
-  }'</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "name": "John Doe",
+                            "email": "john.doe@example.com",
+                            "intake_id": 2,
+                            "phone": "+1234567890",
+                            "course": "Web Development",
+                            "mode_of_contact": "email"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -741,8 +747,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Student Created</div>
                             <div class="code-block">{
-  "message": "Student created successfully"
-}</div>
+                                "message": "Student created successfully"
+                                }</div>
                         </div>
                     </div>
 
@@ -751,8 +757,8 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
                             <div class="code-block">{
-  "message": "The email has already been taken."
-}</div>
+                                "message": "The email has already been taken."
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -769,7 +775,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Retrieve detailed information about a specific student.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">GET /students/{id}</div>
@@ -798,8 +804,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/students/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -807,14 +813,14 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">{
-  "id": 1,
-  "user_id": 5,
-  "intake_id": 2,
-  "mode_of_contact": "email",
-  "status": "active",
-  "created_at": "2025-12-10T10:30:00.000000Z",
-  "updated_at": "2025-12-10T10:30:00.000000Z"
-}</div>
+                                "id": 1,
+                                "user_id": 5,
+                                "intake_id": 2,
+                                "mode_of_contact": "email",
+                                "status": "active",
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }</div>
                         </div>
                     </div>
 
@@ -823,8 +829,8 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-404">404</span>Not Found</div>
                             <div class="code-block">{
-  "message": "No query results found for model [App\\Models\\Student] 1"
-}</div>
+                                "message": "No query results found for model [App\\Models\\Student] 1"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -841,7 +847,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Update student information. All fields are optional.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">PUT /students/{id}</div>
@@ -880,12 +886,12 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X PUT "{{ url('/api') }}/students/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "course": "Advanced Web Development",
-    "status": "active"
-  }'</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "course": "Advanced Web Development",
+                            "status": "active"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -893,8 +899,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Updated</div>
                             <div class="code-block">{
-  "message": "Student updated successfully"
-}</div>
+                                "message": "Student updated successfully"
+                                }</div>
                         </div>
                     </div>
 
@@ -903,8 +909,8 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-500">500</span>Server Error</div>
                             <div class="code-block">{
-  "message": "Student with ID 999 not found"
-}</div>
+                                "message": "Student with ID 999 not found"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -921,7 +927,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Delete a student record from the system.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">DELETE /students/{id}</div>
@@ -950,8 +956,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X DELETE "{{ url('/api') }}/students/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -959,8 +965,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Deleted</div>
                             <div class="code-block">{
-  "message": "Student deleted successfully"
-}</div>
+                                "message": "Student deleted successfully"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -980,7 +986,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Retrieve a list of all intakes (enrollment periods).</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">GET /intakes</div>
@@ -994,8 +1000,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/intakes" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -1003,21 +1009,21 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">{
-  "intakes": [
-    {
-      "id": 1,
-      "name": "2025-Q1",
-      "start_month": "January",
-      "end_month": "March",
-      "year": 2025,
-      "student_capacity": 50,
-      "progress": 45,
-      "status": "active",
-      "created_at": "2025-12-10T10:30:00.000000Z",
-      "updated_at": "2025-12-10T10:30:00.000000Z"
-    }
-  ]
-}</div>
+                                "intakes": [
+                                {
+                                "id": 1,
+                                "name": "2025-Q1",
+                                "start_month": "January",
+                                "end_month": "March",
+                                "year": 2025,
+                                "student_capacity": 50,
+                                "progress": 45,
+                                "status": "active",
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                ]
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1034,7 +1040,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Create a new intake (enrollment period). Name, start_month, end_month, and year are required.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">POST /intakes</div>
@@ -1095,16 +1101,16 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/intakes" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "2025-Q2",
-    "start_month": "April",
-    "end_month": "June",
-    "year": 2025,
-    "student_capacity": 60,
-    "status": "active"
-  }'</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "name": "2025-Q2",
+                            "start_month": "April",
+                            "end_month": "June",
+                            "year": 2025,
+                            "student_capacity": 60,
+                            "status": "active"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -1112,8 +1118,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Created</div>
                             <div class="code-block">{
-  "message": "Intake created successfully"
-}</div>
+                                "message": "Intake created successfully"
+                                }</div>
                         </div>
                     </div>
 
@@ -1122,8 +1128,8 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
                             <div class="code-block">{
-  "message": "The name field is required."
-}</div>
+                                "message": "The name field is required."
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1140,7 +1146,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Retrieve detailed information about a specific intake.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">GET /intakes/{id}</div>
@@ -1169,8 +1175,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/intakes/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -1178,19 +1184,19 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">{
-  "intake": {
-    "id": 1,
-    "name": "2025-Q1",
-    "start_month": "January",
-    "end_month": "March",
-    "year": 2025,
-    "student_capacity": 50,
-    "progress": 45,
-    "status": "active",
-    "created_at": "2025-12-10T10:30:00.000000Z",
-    "updated_at": "2025-12-10T10:30:00.000000Z"
-  }
-}</div>
+                                "intake": {
+                                "id": 1,
+                                "name": "2025-Q1",
+                                "start_month": "January",
+                                "end_month": "March",
+                                "year": 2025,
+                                "student_capacity": 50,
+                                "progress": 45,
+                                "status": "active",
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1207,7 +1213,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Update intake information. All fields are optional.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">PUT /intakes/{id}</div>
@@ -1266,12 +1272,12 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X PUT "{{ url('/api') }}/intakes/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "status": "completed",
-    "progress": 100
-  }'</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "status": "completed",
+                            "progress": 100
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -1279,8 +1285,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Updated</div>
                             <div class="code-block">{
-  "message": "Intake updated successfully"
-}</div>
+                                "message": "Intake updated successfully"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1297,7 +1303,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Delete an intake record from the system.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">DELETE /intakes/{id}</div>
@@ -1306,8 +1312,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X DELETE "{{ url('/api') }}/intakes/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -1315,8 +1321,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Deleted</div>
                             <div class="code-block">{
-  "message": "Intake deleted successfully"
-}</div>
+                                "message": "Intake deleted successfully"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1336,7 +1342,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Retrieve a list of all available courses.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">GET /courses</div>
@@ -1350,8 +1356,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/courses" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -1359,18 +1365,18 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">[
-  {
-    "id": 1,
-    "title": "Web Development Basics",
-    "slug": "web_development_basics",
-    "description": "Learn the fundamentals of web development",
-    "price": "9999",
-    "cover": "courses/web-dev.jpg",
-    "status": "active",
-    "created_at": "2025-12-10T10:30:00.000000Z",
-    "updated_at": "2025-12-10T10:30:00.000000Z"
-  }
-]</div>
+                                {
+                                "id": 1,
+                                "title": "Web Development Basics",
+                                "slug": "web_development_basics",
+                                "description": "Learn the fundamentals of web development",
+                                "price": "9999",
+                                "cover": "courses/web-dev.jpg",
+                                "status": "active",
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                ]</div>
                         </div>
                     </div>
                 </div>
@@ -1387,7 +1393,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Create a new course offering. Title, description, and price are required. A slug is automatically generated from the title.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">POST /courses</div>
@@ -1442,14 +1448,14 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/courses" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Advanced PHP Development",
-    "description": "Master advanced PHP concepts and frameworks",
-    "price": "15000",
-    "status": "active"
-  }'</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "title": "Advanced PHP Development",
+                            "description": "Master advanced PHP concepts and frameworks",
+                            "price": "15000",
+                            "status": "active"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -1457,16 +1463,16 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-201">201</span>Created</div>
                             <div class="code-block">{
-  "id": 2,
-  "title": "Advanced PHP Development",
-  "slug": "advanced_php_development",
-  "description": "Master advanced PHP concepts and frameworks",
-  "price": "15000",
-  "cover": null,
-  "status": "active",
-  "created_at": "2025-12-10T11:45:00.000000Z",
-  "updated_at": "2025-12-10T11:45:00.000000Z"
-}</div>
+                                "id": 2,
+                                "title": "Advanced PHP Development",
+                                "slug": "advanced_php_development",
+                                "description": "Master advanced PHP concepts and frameworks",
+                                "price": "15000",
+                                "cover": null,
+                                "status": "active",
+                                "created_at": "2025-12-10T11:45:00.000000Z",
+                                "updated_at": "2025-12-10T11:45:00.000000Z"
+                                }</div>
                         </div>
                     </div>
 
@@ -1475,10 +1481,10 @@
                         <div class="error-block">
                             <div class="label"><span class="response-status status-400">400</span>Validation Failed</div>
                             <div class="code-block">{
-  "title": [
-    "The title field is required."
-  ]
-}</div>
+                                "title": [
+                                "The title field is required."
+                                ]
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1495,7 +1501,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Retrieve detailed information about a specific course.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">GET /courses/{id}</div>
@@ -1524,8 +1530,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X GET "{{ url('/api') }}/courses/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -1533,18 +1539,18 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Success</div>
                             <div class="code-block">{
-  "course": {
-    "id": 1,
-    "title": "Web Development Basics",
-    "slug": "web_development_basics",
-    "description": "Learn the fundamentals of web development",
-    "price": "9999",
-    "cover": "courses/web-dev.jpg",
-    "status": "active",
-    "created_at": "2025-12-10T10:30:00.000000Z",
-    "updated_at": "2025-12-10T10:30:00.000000Z"
-  }
-}</div>
+                                "course": {
+                                "id": 1,
+                                "title": "Web Development Basics",
+                                "slug": "web_development_basics",
+                                "description": "Learn the fundamentals of web development",
+                                "price": "9999",
+                                "cover": "courses/web-dev.jpg",
+                                "status": "active",
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1561,7 +1567,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Update course information. All fields are optional.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">PUT /courses/{id}</div>
@@ -1610,12 +1616,12 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X PUT "{{ url('/api') }}/courses/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "price": "12000",
-    "status": "inactive"
-  }'</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{
+                            "price": "12000",
+                            "status": "inactive"
+                            }'</div>
                     </div>
 
                     <div class="section">
@@ -1623,8 +1629,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Updated</div>
                             <div class="code-block">{
-  "message": "Course updated successfully"
-}</div>
+                                "message": "Course updated successfully"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1641,7 +1647,7 @@
                 </div>
                 <div class="endpoint-body">
                     <div class="description">Delete a course record from the system.</div>
-                    
+
                     <div class="section">
                         <div class="section-title">Endpoint</div>
                         <div class="code-block">DELETE /courses/{id}</div>
@@ -1650,8 +1656,8 @@
                     <div class="section">
                         <div class="section-title">Sample Request</div>
                         <div class="code-block">curl -X DELETE "{{ url('/api') }}/courses/1" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Accept: application/json"</div>
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
                     </div>
 
                     <div class="section">
@@ -1659,8 +1665,8 @@
                         <div class="success-block">
                             <div class="label"><span class="response-status status-200">200</span>Deleted</div>
                             <div class="code-block">{
-  "message": "Course deleted successfully"
-}</div>
+                                "message": "Course deleted successfully"
+                                }</div>
                         </div>
                     </div>
                 </div>
@@ -1746,8 +1752,8 @@
                 <div class="error-block">
                     <div class="label"><span class="response-status status-500">401</span>Unauthorized</div>
                     <div class="code-block">{
-  "message": "Unauthenticated."
-}</div>
+                        "message": "Unauthenticated."
+                        }</div>
                 </div>
             </div>
 
@@ -1757,8 +1763,8 @@
                 <div class="error-block">
                     <div class="label"><span class="response-status status-500">404</span>Not Found</div>
                     <div class="code-block">{
-  "message": "No query results found for model [App\\Models\\Student] 999"
-}</div>
+                        "message": "No query results found for model [App\\Models\\Student] 999"
+                        }</div>
                 </div>
             </div>
 
@@ -1768,8 +1774,8 @@
                 <div class="error-block">
                     <div class="label"><span class="response-status status-500">500</span>Server Error</div>
                     <div class="code-block">{
-  "message": "Something went wrong. Exception message details..."
-}</div>
+                        "message": "Something went wrong. Exception message details..."
+                        }</div>
                 </div>
             </div>
 
@@ -1780,4 +1786,5 @@
         </footer>
     </div>
 </body>
+
 </html>
