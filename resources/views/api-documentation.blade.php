@@ -305,7 +305,7 @@
 
         <div class="content">
             <!-- Introduction Section -->
-            <div class="intro-section">
+                <div class="intro-section">
                 <h2>📋 Getting Started</h2>
                 <p><strong>Base URL:</strong> <code>{{ url('/api') }}</code></p>
                 <p><strong>Authentication:</strong> All endpoints require Bearer token authentication via Sanctum. Include the token in the Authorization header:</p>
@@ -340,7 +340,7 @@
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /api/signup</div>
+                        <div class="code-block">POST /signup</div>
                     </div>
 
                     <div class="section">
@@ -385,7 +385,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api/signup') }}" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/signup" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "New User",
@@ -439,7 +439,7 @@
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /api/login</div>
+                        <div class="code-block">POST /login</div>
                     </div>
 
                     <div class="section">
@@ -472,7 +472,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api/login') }}" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/login" \
   -H "Content-Type: application/json" \
   -d '{
     "email": "new.user@example.com",
@@ -525,7 +525,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">GET /api/students</div>
+                        <div class="code-block">GET /students</div>
                     </div>
 
                     <div class="section">
@@ -535,7 +535,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X GET "{{ url('/api/students') }}" \
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/students" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -577,7 +577,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /api/students</div>
+                        <div class="code-block">POST /students</div>
                     </div>
 
                     <div class="section">
@@ -640,7 +640,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api/students') }}" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/students" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -694,7 +694,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">GET /api/students/{id}</div>
+                        <div class="code-block">GET /students/{id}</div>
                     </div>
 
                     <div class="section">
@@ -719,7 +719,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X GET "{{ url('/api/students/1') }}" \
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/students/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -766,7 +766,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">PUT /api/students/{id}</div>
+                        <div class="code-block">PUT /students/{id}</div>
                     </div>
 
                     <div class="section">
@@ -801,7 +801,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X PUT "{{ url('/api/students/1') }}" \
+                        <div class="code-block">curl -X PUT "{{ url('/api') }}/students/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -846,7 +846,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">DELETE /api/students/{id}</div>
+                        <div class="code-block">DELETE /students/{id}</div>
                     </div>
 
                     <div class="section">
@@ -871,7 +871,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X DELETE "{{ url('/api/students/1') }}" \
+                        <div class="code-block">curl -X DELETE "{{ url('/api') }}/students/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -905,7 +905,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">GET /api/intakes</div>
+                        <div class="code-block">GET /intakes</div>
                     </div>
 
                     <div class="section">
@@ -915,7 +915,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X GET "{{ url('/api/intakes') }}" \
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/intakes" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -959,7 +959,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /api/intakes</div>
+                        <div class="code-block">POST /intakes</div>
                     </div>
 
                     <div class="section">
@@ -1016,7 +1016,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api/intakes') }}" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/intakes" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1065,7 +1065,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">GET /api/intakes/{id}</div>
+                        <div class="code-block">GET /intakes/{id}</div>
                     </div>
 
                     <div class="section">
@@ -1090,7 +1090,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X GET "{{ url('/api/intakes/1') }}" \
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/intakes/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -1132,7 +1132,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">PUT /api/intakes/{id}</div>
+                        <div class="code-block">PUT /intakes/{id}</div>
                     </div>
 
                     <div class="section">
@@ -1187,7 +1187,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X PUT "{{ url('/api/intakes/1') }}" \
+                        <div class="code-block">curl -X PUT "{{ url('/api') }}/intakes/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1222,12 +1222,12 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">DELETE /api/intakes/{id}</div>
+                        <div class="code-block">DELETE /intakes/{id}</div>
                     </div>
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X DELETE "{{ url('/api/intakes/1') }}" \
+                        <div class="code-block">curl -X DELETE "{{ url('/api') }}/intakes/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -1261,7 +1261,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">GET /api/courses</div>
+                        <div class="code-block">GET /courses</div>
                     </div>
 
                     <div class="section">
@@ -1271,7 +1271,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X GET "{{ url('/api/courses') }}" \
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/courses" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -1312,7 +1312,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /api/courses</div>
+                        <div class="code-block">POST /courses</div>
                     </div>
 
                     <div class="section">
@@ -1363,7 +1363,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api/courses') }}" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/courses" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1420,7 +1420,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">GET /api/courses/{id}</div>
+                        <div class="code-block">GET /courses/{id}</div>
                     </div>
 
                     <div class="section">
@@ -1445,7 +1445,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X GET "{{ url('/api/courses/1') }}" \
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/courses/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -1486,7 +1486,7 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">PUT /api/courses/{id}</div>
+                        <div class="code-block">PUT /courses/{id}</div>
                     </div>
 
                     <div class="section">
@@ -1531,7 +1531,7 @@
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X PUT "{{ url('/api/courses/1') }}" \
+                        <div class="code-block">curl -X PUT "{{ url('/api') }}/courses/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1566,12 +1566,12 @@
                     
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">DELETE /api/courses/{id}</div>
+                        <div class="code-block">DELETE /courses/{id}</div>
                     </div>
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X DELETE "{{ url('/api/courses/1') }}" \
+                        <div class="code-block">curl -X DELETE "{{ url('/api') }}/courses/1" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Accept: application/json"</div>
                     </div>
@@ -1618,27 +1618,27 @@
                             <tbody>
                                 <tr>
                                     <td><span class="method-badge method-get">GET</span></td>
-                                    <td><code>/api/fee-payments</code></td>
+                                    <td><code>/fee-payments</code></td>
                                     <td>Get all fee payments</td>
                                 </tr>
                                 <tr>
                                     <td><span class="method-badge method-post">POST</span></td>
-                                    <td><code>/api/fee-payments</code></td>
+                                    <td><code>/fee-payments</code></td>
                                     <td>Create a new fee payment</td>
                                 </tr>
                                 <tr>
                                     <td><span class="method-badge method-get">GET</span></td>
-                                    <td><code>/api/fee-payments/{id}</code></td>
+                                    <td><code>/fee-payments/{id}</code></td>
                                     <td>Get fee payment details</td>
                                 </tr>
                                 <tr>
                                     <td><span class="method-badge method-put">PUT</span></td>
-                                    <td><code>/api/fee-payments/{id}</code></td>
+                                    <td><code>/fee-payments/{id}</code></td>
                                     <td>Update fee payment</td>
                                 </tr>
                                 <tr>
                                     <td><span class="method-badge method-delete">DELETE</span></td>
-                                    <td><code>/api/fee-payments/{id}</code></td>
+                                    <td><code>/fee-payments/{id}</code></td>
                                     <td>Delete fee payment</td>
                                 </tr>
                             </tbody>
