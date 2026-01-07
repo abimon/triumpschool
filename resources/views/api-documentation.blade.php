@@ -703,19 +703,19 @@
                                 <tr>
                                     <td>phone</td>
                                     <td>string</td>
-                                    <td><span class="optional">Optional</span></td>
-                                    <td>Student's phone number</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>Student's phone number (used for contact)</td>
                                 </tr>
                                 <tr>
                                     <td>course</td>
                                     <td>string</td>
-                                    <td><span class="optional">Optional</span></td>
+                                    <td><span class="required">Required</span></td>
                                     <td>Course name or ID student is enrolled in</td>
                                 </tr>
                                 <tr>
                                     <td>mode_of_contact</td>
                                     <td>string</td>
-                                    <td><span class="optional">Optional</span></td>
+                                    <td><span class="required">Required</span></td>
                                     <td>Preferred contact method (email, phone, sms)</td>
                                 </tr>
                                 <tr>
@@ -729,7 +729,22 @@
                     </div>
 
                     <div class="section">
-                        <div class="section-title">Sample Request</div>
+                        <div class="section-title">Validation & Notes</div>
+                        <p class="description">Validation rules applied by the API:</p>
+                        <ul style="margin-left:20px; margin-top:8px;">
+                            <li><strong>name</strong>: required string</li>
+                            <li><strong>email</strong>: required, valid email, must be unique</li>
+                            <li><strong>intake_id</strong>: required integer (existing intake ID)</li>
+                            <li><strong>phone</strong>: required, length between 9 and 13 characters</li>
+                            <li><strong>course</strong>: required string (course name or ID)</li>
+                            <li><strong>mode_of_contact</strong>: required string (e.g., email, phone, sms)</li>
+                            <li><strong>image</strong>: optional file; when uploading include as multipart/form-data</li>
+                        </ul>
+                        <p class="description">Note: For file uploads set the request to <code>multipart/form-data</code>. API responses may return validation errors as JSON with an <code>errors</code> object.</p>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request (JSON)</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/students" \
                             -H "Authorization: Bearer YOUR_TOKEN" \
                             -H "Content-Type: application/json" \
@@ -741,6 +756,19 @@
                             "course": "Web Development",
                             "mode_of_contact": "email"
                             }'</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request (multipart/form-data with image)</div>
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/students" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "name=John Doe" \
+  -F "email=john.doe@example.com" \
+  -F "intake_id=2" \
+  -F "phone=+1234567890" \
+  -F "course=Web Development" \
+  -F "mode_of_contact=email" \
+  -F "image=@/path/to/image.jpg"</div>
                     </div>
 
                     <div class="section">
