@@ -44,7 +44,11 @@ class StudentController extends Controller
             ]);
 
             if ($validate->fails()) {
-                return redirect()->back()->withErrors($validate)->withInput();
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $validate->errors()
+                ], 401);
             }
             $user = User::where('email', request()->email)->first();
             if (!$user) {
