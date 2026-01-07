@@ -18,7 +18,7 @@ Route::controller(UserController::class)->group(function () {
 // 2 | j868vUSOwjAV9Dj1OBIORhymgmuAB4FYkKXX1Oop8f95f57e
 Route::middleware('auth:sanctum')->group(function () {
     // Students API
-    Route::Controller(StudentController::class)->prefix('students')->group(function () {
+    Route::controller(StudentController::class)->prefix('students')->group(function () {
         Route::get('/', 'index');
         Route::post('/register', 'store');
         Route::get('/get_details/{id}', 'show');
