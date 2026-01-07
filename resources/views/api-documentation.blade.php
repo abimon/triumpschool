@@ -729,21 +729,6 @@
                     </div>
 
                     <div class="section">
-                        <div class="section-title">Validation & Notes</div>
-                        <p class="description">Validation rules applied by the API:</p>
-                        <ul style="margin-left:20px; margin-top:8px;">
-                            <li><strong>name</strong>: required string</li>
-                            <li><strong>email</strong>: required, valid email, must be unique</li>
-                            <li><strong>intake_id</strong>: required integer (existing intake ID)</li>
-                            <li><strong>phone</strong>: required, length between 9 and 13 characters</li>
-                            <li><strong>course</strong>: required string (course name or ID)</li>
-                            <li><strong>mode_of_contact</strong>: required string (e.g., email, phone, sms)</li>
-                            <li><strong>image</strong>: optional file; when uploading include as multipart/form-data</li>
-                        </ul>
-                        <p class="description">Note: For file uploads set the request to <code>multipart/form-data</code>. API responses may return validation errors as JSON with an <code>errors</code> object.</p>
-                    </div>
-
-                    <div class="section">
                         <div class="section-title">Sample Request (JSON)</div>
                         <div class="code-block">curl -X POST "{{ url('/api') }}/students" \
                             -H "Authorization: Bearer YOUR_TOKEN" \
