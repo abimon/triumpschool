@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Intake;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class IntakeController extends Controller
@@ -35,7 +34,7 @@ class IntakeController extends Controller
     public function store()
     {
         try {
-            $valid = Validator::make(request(), [
+            $valid = Validator::make(request()->all(), [
                 'name' => 'required',
                 'start_month' => 'required',
                 'end_month' => 'required',
