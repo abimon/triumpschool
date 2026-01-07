@@ -327,6 +327,49 @@
                 <p><strong>Response Format:</strong> All responses are in JSON format.</p>
             </div>
 
+            <!-- Routes Summary -->
+            <div class="intro-section">
+                <h3>🔗 Routes Summary</h3>
+                <p class="description">Routes are defined in <code>routes/api.php</code>. The base URL already includes the <code>/api</code> prefix, so endpoints below are shown relative to that base.</p>
+                <div class="section">
+                    <div class="section-title">Public (no auth)</div>
+                    <div class="code-block">POST /signup
+POST /login</div>
+                </div>
+                <div class="section">
+                    <div class="section-title">Protected (requires Sanctum)</div>
+                    <div class="code-block">GET /user
+
+Students (CRUD):
+GET /students
+POST /students
+GET /students/{id}
+PUT /students/{id}
+DELETE /students/{id}
+
+Intakes (CRUD):
+GET /intakes
+POST /intakes
+GET /intakes/{id}
+PUT /intakes/{id}
+DELETE /intakes/{id}
+
+Courses (CRUD):
+GET /courses
+POST /courses
+GET /courses/{id}
+PUT /courses/{id}
+DELETE /courses/{id}
+
+Fee Payments (stubbed controller):
+GET /fee-payments
+POST /fee-payments
+GET /fee-payments/{id}
+PUT /fee-payments/{id}
+DELETE /fee-payments/{id}</div>
+                </div>
+            </div>
+
             <!-- Table of Contents -->
             <div class="toc">
                 <h3>📑 Table of Contents</h3>

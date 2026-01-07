@@ -18,18 +18,39 @@ Route::controller(UserController::class)->group(function () {
 // 2 | j868vUSOwjAV9Dj1OBIORhymgmuAB4FYkKXX1Oop8f95f57e
 Route::middleware('auth:sanctum')->group(function () {
     // Students API
-    Route::apiResource('students', StudentController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::Controller(StudentController::class)->prefix('students')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/register', 'store');
+        Route::get('/get_details/{id}', 'show');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 
     // Intakes API
-    Route::apiResource('intakes', IntakeController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::controller(IntakeController::class)->prefix('intakes')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/create', 'store');
+        Route::get('/show/{id}', 'show');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 
     // Courses API
-    Route::apiResource('courses', CourseController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::controller(CourseController::class)->prefix('courses')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/create', 'store');
+        Route::get('/show/{id}', 'show');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 
     // Fee payments (stubbed controller)
-    Route::apiResource('fee-payments', FeePaymentController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::controller(FeePaymentController::class)->prefix('fee-payments')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/make-payment', 'store');
+        Route::get('/show/{id}', 'show');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 
-
-    // Student Routes
-    Route::apiResource('students',StudentController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 });
