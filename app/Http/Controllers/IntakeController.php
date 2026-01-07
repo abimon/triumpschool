@@ -35,16 +35,16 @@ class IntakeController extends Controller
     {
         try {
             $valid = Validator::make(request()->all(), [
-                'name' => 'required',
-                'start_month' => 'required',
-                'end_month' => 'required',
-                'year' => 'required',
+                'name' => 'required|string',
+                'start_month' => 'required|string',
+                'end_month' => 'required|string',
+                'year' => 'required|string|max:4',
             ]);
             if ($valid->fails()) {
                 if (request()->is('api/*')) {
-                    return response()->json(['message' => $valid->errors()->first()], 422);
+                    response()->json(['status' => false, 'message' => 'Validation failed', 'errors' => $valid->errors()], 422);
                 }
-                return redirect()->back()->with('error', $valid->errors()->first());
+                return redirect()->back()->with('errors', $valid->errors());
             }
             Intake::create([
                 'name' => request('name'),

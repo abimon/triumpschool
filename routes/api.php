@@ -15,7 +15,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/login', 'create');
     Route::post('/signup', 'store');
 });
-// 2 | j868vUSOwjAV9Dj1OBIORhymgmuAB4FYkKXX1Oop8f95f57e
+// 4|75s71w9RMbEmzThYdBHNVlTncDq6RP4cCdWU9M3o3dc701f1
 Route::middleware('auth:sanctum')->group(function () {
     // Students API
     Route::controller(StudentController::class)->prefix('students')->group(function () {
