@@ -73,7 +73,7 @@ class UserController extends Controller
                     'email' => 'required|email|unique:users,email',
                     'password' => 'required|min:8',
                     'phone' => 'required|min:9|max:13',
-                    'role' => 'required|string|in:Student,Staff,Admin'
+                    // 'role' => 'required|string|in:Student,Staff,Admin'
                 ]
             );
 
@@ -90,7 +90,7 @@ class UserController extends Controller
                 'phone' => request('phone'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
-                'role' => request('role')
+                'role' => 'Student'
             ]);
             return response()->json([
                 'user' => $user,
