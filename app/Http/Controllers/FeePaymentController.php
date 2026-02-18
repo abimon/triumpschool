@@ -46,7 +46,6 @@ class FeePaymentController extends Controller
             }
             FeePayment::create([
                 'student_id'=>request('student_id'),
-                'fee_id'=>request('fee_id'),
                 'amount'=>request('amount'),
                 'payment_method'=>request('payment_method'),
                 'payment_status'=>request('payment_status'),
