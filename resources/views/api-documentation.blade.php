@@ -340,35 +340,33 @@ POST /login</div>
                     <div class="section-title">Protected (requires Sanctum)</div>
                     <div class="code-block">GET /user
 
-Students (protected):
+# Students
 GET /students
 POST /students/register
 GET /students/get_details/{id}
 PUT /students/update/{id}
 DELETE /students/delete/{id}
 
-Intakes (protected):
+# Intakes
 GET /intakes
 POST /intakes/store
 GET /intakes/show/{id}
 PUT /intakes/update/{id}
 DELETE /intakes/delete/{id}
 
-Courses (protected):
+# Courses
 GET /courses
 POST /courses/store
 GET /courses/show/{id}
 PUT /courses/update/{id}
 DELETE /courses/delete/{id}
 
-Fee Payments (protected, stubbed):
+# Fee Payments
 GET /fee-payments
-POST /fee-payments/make-payment
-GET /fee-payments/show/{id}
-PUT /fee-payments/update/{id}
-DELETE /fee-payments/delete/{id}</div>
-                </div>
-            </div>
+POST /fee-payments
+GET /fee-payments/{id}
+PUT /fee-payments/{id}
+DELETE /fee-payments/{id}</div>
 
             <!-- Table of Contents -->
             <div class="toc">
@@ -1732,70 +1730,319 @@ DELETE /fee-payments/delete/{id}</div>
             <!-- FEE PAYMENTS ENDPOINTS -->
             <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;" id="fee-payments">💳 Fee Payments Endpoints</h2>
 
-            <div class="intro-section">
-                <h3>ℹ️ Status</h3>
-                <p>The Fee Payments API endpoints are currently <strong>under development</strong>. The controller is stubbed and ready for implementation. The following endpoints will be available once implemented:</p>
-            </div>
-
-            <!-- Fee Payments Endpoints Structure -->
+            <!-- GET All Payments -->
             <div class="endpoint-card">
                 <div class="endpoint-header">
-                    <h3>Fee Payments Endpoints (Coming Soon)</h3>
+                    <h3>Get All Fee Payments</h3>
                     <div>
+                        <span class="method-badge method-get">GET</span>
                         <span class="auth-required">Auth Required</span>
                     </div>
                 </div>
                 <div class="endpoint-body">
+                    <div class="description">Retrieve all fee payment records.</div>
+
                     <div class="section">
-                        <div class="section-title">Available Endpoints</div>
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">GET /fee-payments</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Parameters</div>
+                        <p>No parameters required.</p>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/fee-payments" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (200 OK)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-200">200</span>Success</div>
+                            <div class="code-block">[
+                                {
+                                "id": 1,
+                                "student_id": 5,
+                                "fee_id": 2,
+                                "amount": "5000",
+                                "payment_method": "cash",
+                                "payment_status": "completed",
+                                "logged_by": 1,
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                ]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POST Create Payment -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Create a New Fee Payment</h3>
+                    <div>
+                        <span class="method-badge method-post">POST</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Submit a new fee payment record.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">POST /fee-payments</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Request Parameters</div>
                         <table class="parameter-table">
                             <thead>
                                 <tr>
-                                    <th>Method</th>
-                                    <th>Endpoint</th>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
                                     <th>Description</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="method-badge method-get">GET</span></td>
-                                    <td><code>/fee-payments</code></td>
-                                    <td>Get all fee payments</td>
+                                    <td>student_id</td>
+                                    <td>integer</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>ID of student making the payment</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="method-badge method-post">POST</span></td>
-                                    <td><code>/fee-payments/make-payment</code></td>
-                                    <td>Create a new fee payment</td>
+                                    <td>fee_id</td>
+                                    <td>integer</td>
+                                    <td><span class="optional">Optional</span></td>
+                                    <td>Reference to associated fee (if any)</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="method-badge method-get">GET</span></td>
-                                    <td><code>/fee-payments/show/{id}</code></td>
-                                    <td>Get fee payment details</td>
+                                    <td>amount</td>
+                                    <td>numeric</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>Payment amount</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="method-badge method-put">PUT</span></td>
-                                    <td><code>/fee-payments/update/{id}</code></td>
-                                    <td>Update fee payment</td>
+                                    <td>payment_method</td>
+                                    <td>string</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>Method used (cash, card, mobile, etc.)</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="method-badge method-delete">DELETE</span></td>
-                                    <td><code>/fee-payments/delete/{id}</code></td>
-                                    <td>Delete fee payment</td>
+                                    <td>payment_status</td>
+                                    <td>string</td>
+                                    <td><span class="required">Required</span></td>
+                                    <td>Status of payment (pending, completed)</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="section">
-                        <div class="section-title">Expected Parameters (To Be Implemented)</div>
-                        <p>Expected parameters will include:</p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li><strong>student_id</strong> (required) - Student making the payment</li>
-                            <li><strong>amount</strong> (required) - Payment amount</li>
-                            <li><strong>payment_date</strong> (optional) - Date of payment</li>
-                            <li><strong>payment_method</strong> (optional) - Method of payment</li>
-                            <li><strong>status</strong> (optional) - Payment status (e.g., pending, completed, failed)</li>
-                        </ul>
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/fee-payments" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json" \
+                            -d "student_id=5" \
+                            -d "fee_id=2" \
+                            -d "amount=5000" \
+                            -d "payment_method=cash" \
+                            -d "payment_status=completed"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Created (201)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-201">201</span>Created</div>
+                            <div class="code-block">{
+                                "message": "Fee Payment created successfully",
+                                "data": {
+                                    "id": 1,
+                                    "student_id": 5,
+                                    "fee_id": 2,
+                                    "amount": "5000",
+                                    "payment_method": "cash",
+                                    "payment_status": "completed",
+                                    "logged_by": 1,
+                                    "created_at": "2025-12-10T10:30:00.000000Z",
+                                    "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }
+                                }</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GET single payment -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Get Fee Payment by ID</h3>
+                    <div>
+                        <span class="method-badge method-get">GET</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Retrieve details for a specific payment.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">GET /fee-payments/{id}</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Parameters</div>
+                        <p><strong>id</strong> path parameter (integer) - payment record ID</p>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/fee-payments/1" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (200 OK)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-200">200</span>Success</div>
+                            <div class="code-block">{
+                                "id": 1,
+                                "student_id": 5,
+                                "fee_id": 2,
+                                "amount": "5000",
+                                "payment_method": "cash",
+                                "payment_status": "completed",
+                                "logged_by": 1,
+                                "created_at": "2025-12-10T10:30:00.000000Z",
+                                "updated_at": "2025-12-10T10:30:00.000000Z"
+                                }</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUT update payment -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Update a Fee Payment</h3>
+                    <div>
+                        <span class="method-badge method-put">PUT</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Modify an existing payment record.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">PUT /fee-payments/{id}</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Request Parameters</div>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>amount</td>
+                                    <td>numeric</td>
+                                    <td><span class="optional">Optional</span></td>
+                                    <td>New payment amount</td>
+                                </tr>
+                                <tr>
+                                    <td>payment_method</td>
+                                    <td>string</td>
+                                    <td><span class="optional">Optional</span></td>
+                                    <td>Updated payment method</td>
+                                </tr>
+                                <tr>
+                                    <td>payment_status</td>
+                                    <td>string</td>
+                                    <td><span class="optional">Optional</span></td>
+                                    <td>Updated status (pending/completed)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X PUT "{{ url('/api') }}/fee-payments/1" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json" \
+                            -d "amount=5500" \
+                            -d "payment_status=pending"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (200 OK)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-200">200</span>Success</div>
+                            <div class="code-block">{
+                                "message": "Fee Payment record updated successfully",
+                                "data": {
+                                    "id": 1,
+                                    "student_id": 5,
+                                    "fee_id": 2,
+                                    "amount": "5500",
+                                    "payment_method": "cash",
+                                    "payment_status": "pending",
+                                    "logged_by": 1,
+                                    "created_at": "2025-12-10T10:30:00.000000Z",
+                                    "updated_at": "2025-12-11T09:00:00.000000Z"
+                                }
+                                }</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DELETE payment -->
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Delete a Fee Payment</h3>
+                    <div>
+                        <span class="method-badge method-delete">DELETE</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Remove a payment record from the system.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">DELETE /fee-payments/{id}</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X DELETE "{{ url('/api') }}/fee-payments/1" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (200 OK)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-200">200</span>Deleted</div>
+                            <div class="code-block">{
+                                "message": "Fee Payment deleted successfully"
+                                }</div>
+                        </div>
                     </div>
                 </div>
             </div>

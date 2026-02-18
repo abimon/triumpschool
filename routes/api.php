@@ -44,13 +44,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/delete/{id}', 'destroy');
     });
 
-    // Fee payments (stubbed controller)
+    // Fee payments API - CRUD operations
     Route::controller(FeePaymentController::class)->prefix('fee-payments')->group(function () {
-        Route::get('/', 'index');
-        Route::post('/make-payment', 'store');
-        Route::get('/show/{id}', 'show');
-        Route::put('/update/{id}', 'update');
-        Route::delete('/delete/{id}', 'destroy');
+        Route::get('/', 'index');             // list all payments
+        Route::post('/', 'store');            // create new payment
+        Route::get('/{id}', 'show');          // show single payment
+        Route::put('/{id}', 'update');        // update payment
+        Route::delete('/{id}', 'destroy');    // delete payment
     });
 
 });
