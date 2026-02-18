@@ -80,6 +80,9 @@ class StudentController extends Controller
             }
             return redirect()->back()->with('success', 'Student created successfully');
         } catch (\Exception $e) {
+            if(request()->is('api/*')) {
+                return response()->json(['message' => $e->getMessage()], 500);
+            }
             return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }

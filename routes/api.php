@@ -27,9 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Intakes API
-    Route::controller(IntakeController::class)->prefix('intakes')->group(function () {
+    Route::controller(IntakeController::class)->prefix('/intakes')->group(function () {
         Route::get('/', 'index');
-        Route::post('/create', 'store');
+        Route::post('/store', 'store');
         Route::get('/show/{id}', 'show');
         Route::put('/update/{id}', 'update');
         Route::delete('/delete/{id}', 'destroy');

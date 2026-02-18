@@ -1,11 +1,7 @@
 <?php
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/documentation',function(){
     if(request('phn')=='0752557823'){
         return view('api-documentation');
@@ -13,4 +9,11 @@ Route::get('/documentation',function(){
         return response()->json(['message'=>'Unauthorized'],401);
     }
 });
+
+// static admin clone
+Route::get('/admin', function () {
+    return view('admin');
+});
+
+
 
