@@ -35,7 +35,7 @@ class CourseController extends Controller
     public function store()
     {
         try {
-            $valid = Validator::make(request(), [
+            $valid = Validator::make(request()->all(), [
                 'title' => 'required|string',
                 'description' => 'required|string',
                 'price' => 'required|string',
