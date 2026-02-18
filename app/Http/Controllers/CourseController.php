@@ -48,6 +48,7 @@ class CourseController extends Controller
             $course = Course::create([
                 'title' => request('title'),
                 'slug' => Str::slug(request('title'), '_'),
+                'cover'=>'no_image.jpg',
                 'description' => request('description'),
                 'price' => request('price'),
                 'status' => request('status'),
