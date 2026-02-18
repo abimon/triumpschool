@@ -349,14 +349,14 @@ DELETE /students/delete/{id}
 
 Intakes (protected):
 GET /intakes
-POST /intakes/create
+POST /intakes/store
 GET /intakes/show/{id}
 PUT /intakes/update/{id}
 DELETE /intakes/delete/{id}
 
 Courses (protected):
 GET /courses
-POST /courses/create
+POST /courses/store
 GET /courses/show/{id}
 PUT /courses/update/{id}
 DELETE /courses/delete/{id}
@@ -1100,7 +1100,7 @@ DELETE /fee-payments/delete/{id}</div>
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /intakes/create</div>
+                        <div class="code-block">POST /intakes/store</div>
                     </div>
 
                     <div class="section">
@@ -1157,7 +1157,7 @@ DELETE /fee-payments/delete/{id}</div>
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api') }}/intakes/create" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/intakes/store" \
                             -H "Authorization: Bearer YOUR_TOKEN" \
                             -H "Content-Type: application/json" \
                             -d '{
@@ -1453,7 +1453,7 @@ DELETE /fee-payments/delete/{id}</div>
 
                     <div class="section">
                         <div class="section-title">Endpoint</div>
-                        <div class="code-block">POST /courses/create</div>
+                        <div class="code-block">POST /courses/store</div>
                     </div>
 
                     <div class="section">
@@ -1504,7 +1504,7 @@ DELETE /fee-payments/delete/{id}</div>
 
                     <div class="section">
                         <div class="section-title">Sample Request</div>
-                        <div class="code-block">curl -X POST "{{ url('/api') }}/courses/create" \
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/courses/store" \
                             -H "Authorization: Bearer YOUR_TOKEN" \
                             -H "Content-Type: application/json" \
                             -d '{
