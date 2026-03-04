@@ -12,8 +12,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 Route::controller(UserController::class)->group(function () {
-    Route::post('/login', 'create');
-    Route::post('/signup', 'store');
+    Route::post('/login', 'login');
+    Route::post('/signup', 'register');
+    Route::post('/logoutAll', 'logoutAll')->middleware('auth:sanctum');
+    Route::post('/logout', 'logout')->middleware('auth:sanctum');
 });
 // 4|75s71w9RMbEmzThYdBHNVlTncDq6RP4cCdWU9M3o3dc701f1
 Route::middleware('auth:sanctum')->group(function () {
@@ -45,12 +47,16 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Fee payments API - CRUD operations
-    Route::controller(FeePaymentController::class)->prefix('fee-payments')->group(function () {
-        Route::get('/', 'index');             // list all payments
-        Route::post('/', 'store');            // create new payment
-        Route::get('/{id}', 'show');          // show single payment
-        Route::put('/{id}', 'update');        // update payment
-        Route::delete('/{id}', 'destroy');    // delete payment
+    Route::controller(FeePaymentController::class)->group(function () {
+        Route::get('/fee-payments', 'index');             // list all payments
+        Route::post('/fee-payments', 'store');            // create new payment
+        Route::get('/fee-payments/{id}', 'show');         // show single payment
+        Route::put('/fee-payments/{id}', 'update');       // update payment
+        Route::delete('/fee-payments/{id}', 'destroy');   // delete payment
+        Route::get('/fee-payments/show/{field}/{id}', 'showPerField');
+        Route::get('/students/{id}/payments','studentFee');
+        Route::get('/students/{id}/payment-summary','paymentSummary');
     });
+    
 
 });

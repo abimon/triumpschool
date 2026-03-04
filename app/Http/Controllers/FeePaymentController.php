@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\FeePayment;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,22 +36,21 @@ class FeePaymentController extends Controller
     public function store()
     {
         try {
-            $validate = Validator::make(request()->all(),[
-                'student_id'=>'required|exists:users,id',
-                'amount'=>'required|numeric|min:0',
-                'payment_method'=>'required|string',
-                'payment_status'=>'required|string',
-                'logged_by'=>'required|exists:users,id'
+            $validate = Validator::make(request()->all(), [
+                'student_id' => 'required|exists:users,id',
+                'amount' => 'required|numeric|min:0',
+                'payment_method' => 'required|string',
+                'payment_status' => 'required|string',
             ]);
-            if($validate->fails()){
-                return response()->json($validate->errors(),400);
+            if ($validate->fails()) {
+                return response()->json($validate->errors(), 400);
             }
             FeePayment::create([
-                'student_id'=>request('student_id'),
-                'amount'=>request('amount'),
-                'payment_method'=>request('payment_method'),
-                'payment_status'=>request('payment_status'),
-                'logged_by'=>Auth::id()
+                'student_id' => request('student_id'),
+                'amount' => request('amount'),
+                'payment_method' => request('payment_method'),
+                'payment_status' => request('payment_status'),
+                'logged_by' => Auth::id()
             ]);
             if (request()->is('api/*')) {
                 return response()->json([
@@ -138,5 +139,39 @@ class FeePaymentController extends Controller
             }
             return redirect()->back()->with('error', 'Error deleting fee payment');
         }
+    }
+
+    public function studentFee($id)
+    {
+        $payments = FeePayment::where('student_id', $id)->get();
+        return response()->json(['data' => $payments], 200);
+    }
+    public function paymentSummary($id)
+    {
+        $student = Student::findOrFail($id)->user_id;
+        $courses = Student::where('user_id', $student)->get()->pluck('course')->toArray();
+        $fees = Course::whereIn('id', $courses)->sum('price');
+        $payments = FeePayment::where([['student_id', $id], ['payment_status', 'paid']])->sum('amount');
+        return response()->json([
+            'status' => 'success',
+            'fees' => $fees,
+            'paid' => $payments,
+            'balance' => $fees - $payments
+        ], 200);
+    }
+    public function showPerField($field, $id) {
+        $payments = FeePayment::where($field, $id)->get();
+        if (!$payments) {
+            if (request()->is('api/*')) {
+                return response()->json([
+                    'message' => 'Fee Payment record not found',
+                ], 404);
+            }
+            return redirect()->back()->with('error', 'Fee Payment record not found');
+        }
+        if (request()->is('api/*')) {
+            return response()->json($payments);
+        }
+        return view('payments.show', compact('payments'));
     }
 }

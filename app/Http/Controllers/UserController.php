@@ -18,7 +18,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function login()
     {
         try {
             $validateUser = Validator::make(
@@ -63,7 +63,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
         try {
             $validateUser = Validator::make(
@@ -105,10 +105,36 @@ class UserController extends Controller
             ], 500);
         }
     }
-
-    /**
-     * Display the specified resource.
-     */
+    public function logoutAll()
+    {
+        try {
+            Auth::user()->tokens()->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged Out Successfully'
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+    public function logout()
+    {
+        try {
+            Auth::user()->currentAccessToken()->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged Out Successfully'
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
     public function show(string $id)
     {
         //
