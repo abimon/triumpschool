@@ -366,7 +366,22 @@ GET /fee-payments
 POST /fee-payments
 GET /fee-payments/{id}
 PUT /fee-payments/{id}
-DELETE /fee-payments/{id}</div>
+DELETE /fee-payments/{id}
+
+# Resources
+GET /resources
+POST /resources/store
+GET /resources/show/{id}
+PUT /resources/update/{id}
+DELETE /resources/delete/{id}
+
+# Class Management
+GET /classes
+POST /classes/store
+GET /classes/upcoming
+GET /classes/show/{id}
+PUT /classes/update/{id}
+DELETE /classes/delete/{id}</div>
 
             <!-- Table of Contents -->
             <div class="toc">
@@ -376,6 +391,8 @@ DELETE /fee-payments/{id}</div>
                     <li><a href="#students">Students Endpoints</a></li>
                     <li><a href="#intakes">Intakes Endpoints</a></li>
                     <li><a href="#courses">Courses Endpoints</a></li>
+                    <li><a href="#resources">Resources Endpoints</a></li>
+                    <li><a href="#classes">Class Management Endpoints</a></li>
                     <li><a href="#fee-payments">Fee Payments Endpoints</a></li>
                     <li><a href="#errors">Common Error Responses</a></li>
                 </ul>
@@ -2044,6 +2061,297 @@ DELETE /fee-payments/{id}</div>
                                 }</div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- RESOURCES ENDPOINTS -->
+            <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;" id="resources">📚 Resources Endpoints</h2>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Get All Resources</h3>
+                    <div>
+                        <span class="method-badge method-get">GET</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Retrieve a list of all resource items.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">GET /resources</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X GET "{{ url('/api') }}/resources" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (200 OK)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-200">200</span>Success</div>
+                            <div class="code-block">[
+                                {
+                                "id": 1,
+                                "title": "Intro to Programming",
+                                "type": "document",
+                                "url": "resources/intro.pdf",
+                                "status": "active",
+                                "created_at": "2026-03-29T12:00:00.000000Z",
+                                "updated_at": "2026-03-29T12:00:00.000000Z"
+                                }
+                                ]</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Unauthorized (401)</div>
+                        <div class="error-block">
+                            <div class="label"><span class="response-status status-401">401</span>Unauthorized</div>
+                            <div class="code-block">{
+                                "message": "Unauthenticated."
+                                }</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Create Resource</h3>
+                    <div>
+                        <span class="method-badge method-post">POST</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Add a new resource record.</div>
+
+                    <div class="section">
+                        <div class="section-title">Endpoint</div>
+                        <div class="code-block">POST /resources/store</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Request Parameters</div>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>title</td><td>string</td><td><span class="required">Required</span></td><td>Resource title</td></tr>
+                                <tr><td>type</td><td>string</td><td><span class="required">Required</span></td><td>Resource type (document, video, etc.)</td></tr>
+                                <tr><td>url</td><td>string</td><td><span class="required">Required</span></td><td>Resource URL/path</td></tr>
+                                <tr><td>status</td><td>string</td><td><span class="optional">Optional</span></td><td>active/inactive</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Request</div>
+                        <div class="code-block">curl -X POST "{{ url('/api') }}/resources/store" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{ "title": "Spring Syllabus", "type": "document", "url": "resources/syllabus.pdf", "status": "active" }'</div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Success (201 Created)</div>
+                        <div class="success-block">
+                            <div class="label"><span class="response-status status-201">201</span>Created</div>
+                            <div class="code-block">{
+                                "message": "Resource created successfully",
+                                "resource": {
+                                "id": 12,
+                                "title": "Spring Syllabus",
+                                "type": "document",
+                                "url": "resources/syllabus.pdf",
+                                "status": "active"
+                                }
+                                }</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Sample Response - Validation Error (422)</div>
+                        <div class="error-block">
+                            <div class="label"><span class="response-status status-422">422</span>Validation Failed</div>
+                            <div class="code-block">{
+                                "message": "The title field is required."
+                                }</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="color: #667eea; margin-top: 40px; margin-bottom: 20px;" id="classes">🏫 Class Management Endpoints</h2>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Get All Classes</h3>
+                    <div>
+                        <span class="method-badge method-get">GET</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Retrieve all class records.</div>
+                    <div class="section"><div class="section-title">Endpoint</div><div class="code-block">GET /classes</div></div>
+                    <div class="section"><div class="section-title">Sample Request</div><div class="code-block">curl -X GET "{{ url('/api') }}/classes" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div></div>
+                    <div class="section"><div class="section-title">Sample Response - Success (200 OK)</div><div class="success-block"><div class="label"><span class="response-status status-200">200</span>Success</div><div class="code-block">[
+                                {
+                                "id": 1,
+                                "name": "Web Dev A",
+                                "start_date": "2026-04-01",
+                                "end_date": "2026-05-31",
+                                "status": "scheduled"
+                                }
+                                ]</div></div></div>
+                    <div class="section"><div class="section-title">Sample Response - Unauthorized (401)</div><div class="error-block"><div class="label"><span class="response-status status-401">401</span>Unauthorized</div><div class="code-block">{
+                                "message": "Unauthenticated."
+                                }</div></div></div>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Create Class</h3>
+                    <div>
+                        <span class="method-badge method-post">POST</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Create a new class entry.</div>
+                    <div class="section"><div class="section-title">Endpoint</div><div class="code-block">POST /classes/store</div></div>
+                    <div class="section"><div class="section-title">Request Parameters</div><table class="parameter-table"><thead><tr><th>Parameter</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody><tr><td>name</td><td>string</td><td><span class="required">Required</span></td><td>Class name</td></tr><tr><td>start_date</td><td>date</td><td><span class="required">Required</span></td><td>Start date</td></tr><tr><td>end_date</td><td>date</td><td><span class="required">Required</span></td><td>End date</td></tr><tr><td>status</td><td>string</td><td><span class="optional">Optional</span></td><td>scheduled/ongoing/completed</td></tr></tbody></table></div>
+                    <div class="section"><div class="section-title">Sample Request</div><div class="code-block">curl -X POST "{{ url('/api') }}/classes/store" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{ "name": "Web Dev A", "start_date": "2026-04-01", "end_date": "2026-05-31", "status": "scheduled" }'</div></div>
+                    <div class="section"><div class="section-title">Sample Response - Success (201 Created)</div><div class="success-block"><div class="label"><span class="response-status status-201">201</span>Created</div><div class="code-block">{
+                                "message": "Class created successfully",
+                                "class": {
+                                "id": 2,
+                                "name": "Web Dev A",
+                                "start_date": "2026-04-01",
+                                "end_date": "2026-05-31",
+                                "status": "scheduled"
+                                }
+                                }</div></div></div>
+                    <div class="section"><div class="section-title">Sample Response - Validation Error (422)</div><div class="error-block"><div class="label"><span class="response-status status-422">422</span>Validation Failed</div><div class="code-block">{
+                                "message": "The name field is required."
+                                }</div></div></div>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Get Upcoming Classes</h3>
+                    <div>
+                        <span class="method-badge method-get">GET</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Get upcoming classes that are not yet started.</div>
+                    <div class="section"><div class="section-title">Endpoint</div><div class="code-block">GET /classes/upcoming</div></div>
+                    <div class="section"><div class="section-title">Sample Request</div><div class="code-block">curl -X GET "{{ url('/api') }}/classes/upcoming" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div></div>
+                    <div class="section"><div class="section-title">Sample Response - Success (200 OK)</div><div class="success-block"><div class="label"><span class="response-status status-200">200</span>Success</div><div class="code-block">[
+                                {
+                                "id": 2,
+                                "name": "Web Dev A",
+                                "start_date": "2026-04-01",
+                                "end_date": "2026-05-31",
+                                "status": "scheduled"
+                                }
+                                ]</div></div></div>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Get Class Details</h3>
+                    <div>
+                        <span class="method-badge method-get">GET</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Retrieve specific class details by ID.</div>
+                    <div class="section"><div class="section-title">Endpoint</div><div class="code-block">GET /classes/show/{id}</div></div>
+                    <div class="section"><div class="section-title">Sample Request</div><div class="code-block">curl -X GET "{{ url('/api') }}/classes/show/1" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div></div>
+                    <div class="section"><div class="section-title">Sample Response - Success (200 OK)</div><div class="success-block"><div class="label"><span class="response-status status-200">200</span>Success</div><div class="code-block">{
+                                "class": {
+                                "id": 1,
+                                "name": "Web Dev A",
+                                "start_date": "2026-04-01",
+                                "end_date": "2026-05-31",
+                                "status": "scheduled"
+                                }
+                                }</div></div></div>
+                    <div class="section"><div class="section-title">Sample Response - Not Found (404)</div><div class="error-block"><div class="label"><span class="response-status status-404">404</span>Not Found</div><div class="code-block">{
+                                "message": "No query results found for model [App\\Models\\ClassManagement] 999"
+                                }</div></div></div>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Update Class</h3>
+                    <div>
+                        <span class="method-badge method-put">PUT</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Update class information.</div>
+                    <div class="section"><div class="section-title">Endpoint</div><div class="code-block">PUT /classes/update/{id}</div></div>
+                    <div class="section"><div class="section-title">Sample Request</div><div class="code-block">curl -X PUT "{{ url('/api') }}/classes/update/1" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{ "name": "Web Dev A (Updated)", "status": "ongoing" }'</div></div>
+                    <div class="section"><div class="section-title">Sample Response - Success (200 OK)</div><div class="success-block"><div class="label"><span class="response-status status-200">200</span>Updated</div><div class="code-block">{
+                                "message": "Class updated successfully"
+                                }</div></div></div>
+                    <div class="section"><div class="section-title">Sample Response - Validation Error (422)</div><div class="error-block"><div class="label"><span class="response-status status-422">422</span>Validation Failed</div><div class="code-block">{
+                                "message": "The start_date is not a valid date."
+                                }</div></div></div>
+                </div>
+            </div>
+
+            <div class="endpoint-card">
+                <div class="endpoint-header">
+                    <h3>Delete Class</h3>
+                    <div>
+                        <span class="method-badge method-delete">DELETE</span>
+                        <span class="auth-required">Auth Required</span>
+                    </div>
+                </div>
+                <div class="endpoint-body">
+                    <div class="description">Delete a class by ID.</div>
+                    <div class="section"><div class="section-title">Endpoint</div><div class="code-block">DELETE /classes/delete/{id}</div></div>
+                    <div class="section"><div class="section-title">Sample Request</div><div class="code-block">curl -X DELETE "{{ url('/api') }}/classes/delete/1" \
+                            -H "Authorization: Bearer YOUR_TOKEN" \
+                            -H "Accept: application/json"</div></div>
+                    <div class="section"><div class="section-title">Sample Response - Success (200 OK)</div><div class="success-block"><div class="label"><span class="response-status status-200">200</span>Deleted</div><div class="code-block">{
+                                "message": "Class deleted successfully"
+                                }</div></div></div>
                 </div>
             </div>
 

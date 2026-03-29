@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClassManagementController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\IntakeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FeePaymentController;
+use App\Http\Controllers\ResourceManagementController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +59,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/students/{id}/payments','studentFee');
         Route::get('/students/{id}/payment-summary','paymentSummary');
     });
-    
+    // Resources API
+    Route::controller(ResourceManagementController::class)->prefix('resources')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
+        Route::get('/show/{id}', 'show');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
+    Route::controller(ClassManagementController::class)->prefix('classes')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
+        Route::get('/upcoming', 'upcomingClasses');
+        Route::get('/show/{id}', 'show');
+        Route::put('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 
 });
